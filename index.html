@@ -1,0 +1,1900 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>হ্যাম বার্গার ক্যাফে এন্ড ফাস্টফুড</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:"Noto Sans Bengali","SolaimanLipi",Arial,sans-serif;
+    background:#f4f6f8;
+    color:#222;
+}
+
+.header{
+    background:linear-gradient(135deg,#111827,#dc2626);
+    color:white;
+    padding:22px 15px;
+    text-align:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.18);
+}
+
+.header h1{
+    font-size:23px;
+    margin-bottom:7px;
+}
+
+.header p{
+    font-size:13px;
+    opacity:.95;
+}
+
+.container{
+    width:100%;
+    max-width:850px;
+    margin:auto;
+    padding:15px;
+}
+
+.card{
+    background:white;
+    border-radius:16px;
+    padding:18px;
+    margin-bottom:15px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.card-title{
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.info{
+    background:#f8fafc;
+    border-radius:12px;
+    padding:12px;
+    text-align:center;
+    border:1px solid #e5e7eb;
+}
+
+.info small{
+    display:block;
+    color:#64748b;
+    font-size:12px;
+    margin-bottom:5px;
+}
+
+.info strong{
+    font-size:15px;
+}
+
+.balance{
+    background:linear-gradient(135deg,#16a34a,#15803d);
+    color:white;
+    border-radius:16px;
+    padding:22px;
+    text-align:center;
+    margin-bottom:15px;
+    box-shadow:0 4px 12px rgba(0,0,0,.12);
+}
+
+.balance small{
+    font-size:13px;
+}
+
+.balance h2{
+    font-size:32px;
+    margin-top:7px;
+}
+
+.form-group{
+    margin-bottom:13px;
+}
+
+label{
+    display:block;
+    font-size:14px;
+    font-weight:bold;
+    margin-bottom:6px;
+}
+
+input{
+    width:100%;
+    padding:13px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    font-size:16px;
+    outline:none;
+    background:white;
+}
+
+input:focus{
+    border-color:#dc2626;
+    box-shadow:0 0 0 2px rgba(220,38,38,.1);
+}
+
+button{
+    border:none;
+    border-radius:10px;
+    padding:12px 16px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.btn-red{
+    background:#dc2626;
+    color:white;
+}
+
+.btn-green{
+    background:#16a34a;
+    color:white;
+}
+
+.btn-dark{
+    background:#111827;
+    color:white;
+}
+
+.btn-gray{
+    background:#e5e7eb;
+    color:#111827;
+}
+
+.btn-orange{
+    background:#ea580c;
+    color:white;
+}
+
+.btn-blue{
+    background:#2563eb;
+    color:white;
+}
+
+.buttons{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.summary-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.summary{
+    padding:15px;
+    border-radius:12px;
+    text-align:center;
+    background:#f8fafc;
+    border:1px solid #e5e7eb;
+}
+
+.summary small{
+    display:block;
+    color:#64748b;
+    margin-bottom:5px;
+}
+
+.summary strong{
+    font-size:18px;
+}
+
+.history-item{
+    border:1px solid #e5e7eb;
+    border-radius:13px;
+    padding:14px;
+    margin-bottom:10px;
+    background:#fff;
+}
+
+.history-top{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:10px;
+}
+
+.history-date{
+    font-weight:bold;
+}
+
+.history-day{
+    color:#64748b;
+    font-size:12px;
+}
+
+.money-row{
+    display:flex;
+    justify-content:space-between;
+    padding:5px 0;
+    font-size:14px;
+}
+
+.money-row.total{
+    border-top:1px solid #e5e7eb;
+    margin-top:6px;
+    padding-top:9px;
+    font-weight:bold;
+}
+
+.empty{
+    text-align:center;
+    color:#64748b;
+    padding:25px 10px;
+}
+
+.admin-lock{
+    text-align:center;
+    padding:20px;
+}
+
+.pin-box{
+    max-width:350px;
+    margin:20px auto;
+}
+
+.pin-box input{
+    text-align:center;
+    letter-spacing:7px;
+    font-weight:bold;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    z-index:1000;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    padding:20px;
+    overflow:auto;
+}
+
+.modal-content{
+    background:white;
+    max-width:600px;
+    margin:30px auto;
+    border-radius:18px;
+    padding:20px;
+}
+
+.modal-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.close{
+    background:#fee2e2;
+    color:#b91c1c;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    padding:0;
+    font-size:20px;
+}
+
+.notice{
+    padding:12px;
+    background:#fff7ed;
+    border:1px solid #fed7aa;
+    color:#9a3412;
+    border-radius:10px;
+    font-size:13px;
+    margin-bottom:15px;
+}
+
+.success{
+    background:#dcfce7;
+    border:1px solid #bbf7d0;
+    color:#166534;
+}
+
+.danger{
+    background:#fee2e2;
+    border:1px solid #fecaca;
+    color:#991b1b;
+}
+
+.footer{
+    text-align:center;
+    padding:20px;
+    color:#64748b;
+    font-size:12px;
+}
+
+.admin-btn{
+    position:fixed;
+    right:14px;
+    bottom:14px;
+    z-index:50;
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    background:#111827;
+    color:white;
+    box-shadow:0 4px 12px rgba(0,0,0,.3);
+    font-size:21px;
+    padding:0;
+}
+
+@media(max-width:600px){
+    .info-grid,
+    .summary-grid{
+        grid-template-columns:1fr;
+    }
+
+    .header h1{
+        font-size:20px;
+    }
+
+    .card{
+        padding:15px;
+    }
+
+    .balance h2{
+        font-size:28px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <h1>🍔 হ্যাম বার্গার ক্যাফে এন্ড ফাস্টফুড</h1>
+    <p>চর লরেন্স দক্ষিণ বাজার, মেইন রোড, কমলনগর, লক্ষ্মীপুর</p>
+</header>
+
+<main class="container">
+
+    <div class="card">
+        <div class="card-title">📅 আজকের তারিখ</div>
+
+        <div class="info-grid">
+            <div class="info">
+                <small>ইংরেজি তারিখ</small>
+                <strong id="engDate">-</strong>
+            </div>
+
+            <div class="info">
+                <small>বাংলা তারিখ</small>
+                <strong id="banglaDate">-</strong>
+            </div>
+
+            <div class="info">
+                <small>বাংলা বার</small>
+                <strong id="banglaDay">-</strong>
+            </div>
+        </div>
+    </div>
+
+    <div class="balance">
+        <small>💰 বর্তমান ক্যাশ</small>
+        <h2 id="currentBalance">৳ 0</h2>
+    </div>
+
+    <div class="card">
+        <div class="card-title">📊 মোট হিসাব</div>
+
+        <div class="summary-grid">
+
+            <div class="summary">
+                <small>মোট বিক্রি</small>
+                <strong id="totalSales">৳ 0</strong>
+            </div>
+
+            <div class="summary">
+                <small>মোট খরচ</small>
+                <strong id="totalExpense">৳ 0</strong>
+            </div>
+
+            <div class="summary">
+                <small>মোট হিসাব</small>
+                <strong id="totalRecords">0 দিন</strong>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title">📋 সাম্প্রতিক হিসাব</div>
+        <div id="history"></div>
+    </div>
+
+</main>
+
+<button class="admin-btn" onclick="openAdmin()">🔐</button>
+
+<div class="modal" id="adminModal">
+
+    <div class="modal-content">
+
+        <div class="modal-head">
+            <h2>🔐 Admin Panel</h2>
+            <button class="close" onclick="closeAdmin()">×</button>
+        </div>
+
+        <div id="loginSection">
+
+            <div class="admin-lock">
+
+                <div class="notice">
+                    শুধুমাত্র অনুমোদিত ব্যক্তি গোপন PIN দিয়ে Admin Panel-এ প্রবেশ করতে পারবেন।
+                </div>
+
+                <div class="pin-box">
+
+                    <label>গোপন PIN</label>
+
+                    <input
+                        type="password"
+                        id="pinInput"
+                        maxlength="20"
+                        inputmode="numeric"
+                        placeholder="PIN লিখুন"
+                    >
+
+                    <br><br>
+
+                    <button class="btn-dark" style="width:100%;" onclick="login()">
+                        🔓 Admin Login
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="panelSection" style="display:none;">
+
+            <div class="notice success">
+                ✅ আপনি Admin হিসেবে লগইন করেছেন।
+            </div>
+
+            <div class="card" style="box-shadow:none;border:1px solid #e5e7eb;">
+
+                <div class="card-title">➕ আজকের হিসাব যোগ করুন</div>
+
+                <div class="form-group">
+                    <label>তারিখ</label>
+                    <input type="date" id="accountDate">
+                </div>
+
+                <div class="form-group">
+                    <label>শুরুর ক্যাশ</label>
+                    <input
+                        type="number"
+                        id="openingCash"
+                        min="0"
+                        step="0.01"
+                        placeholder="যেমন: 10000"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>আজকের বিক্রি</label>
+                    <input
+                        type="number"
+                        id="sales"
+                        min="0"
+                        step="0.01"
+                        placeholder="আজকের মোট বিক্রি"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>আজকের মোট খরচ</label>
+                    <input
+                        type="number"
+                        id="expense"
+                        min="0"
+                        step="0.01"
+                        placeholder="আজকের মোট খরচ"
+                    >
+                </div>
+
+                <div class="notice">
+                    🧮 আজকের ক্যাশ = শুরুর ক্যাশ + বিক্রি − খরচ
+                </div>
+
+                <div class="balance" style="margin-bottom:15px;">
+                    <small>আজকের ক্যাশ</small>
+                    <h2 id="todayPreview">৳ 0</h2>
+                </div>
+
+                <button class="btn-green" style="width:100%;" onclick="saveAccount()">
+                    💾 হিসাব সংরক্ষণ করুন
+                </button>
+
+            </div>
+
+            <div class="card" style="box-shadow:none;border:1px solid #e5e7eb;">
+
+                <div class="card-title">⚙️ Admin Settings</div>
+
+                <div class="buttons">
+
+                    <button class="btn-blue" onclick="changePin()">
+                        🔑 PIN পরিবর্তন
+                    </button>
+
+                    <button class="btn-orange" onclick="exportData()">
+                        📥 Backup
+                    </button>
+
+                    <button class="btn-gray" onclick="document.getElementById('importFile').click()">
+                        📤 Restore
+                    </button>
+
+                    <button class="btn-red" onclick="deleteAllData()">
+                        🗑️ সব হিসাব মুছুন
+                    </button>
+
+                </div>
+
+                <input
+                    type="file"
+                    id="importFile"
+                    accept=".json"
+                    style="display:none"
+                    onchange="importData(event)"
+                >
+
+            </div>
+
+            <div class="card" style="box-shadow:none;border:1px solid #e5e7eb;">
+
+                <div class="card-title">📚 সকল হিসাব</div>
+
+                <div id="adminHistory"></div>
+
+            </div>
+
+            <button
+                class="btn-dark"
+                style="width:100%;"
+                onclick="logout()">
+                🚪 Logout
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<footer class="footer">
+    © 2026 হ্যাম বার্গার ক্যাফে এন্ড ফাস্টফুড
+</footer>
+
+
+<script>
+
+/* =====================================================
+   DATABASE
+===================================================== */
+
+const DATA_KEY = "ham_burger_accounts_v1";
+
+/*
+   নতুন Admin PIN
+   =========================
+   নতুন PIN: 786543
+*/
+const PIN_KEY = "ham_burger_admin_pin_v2";
+
+const NEW_ADMIN_PIN = "786543";
+
+let accounts = JSON.parse(
+    localStorage.getItem(DATA_KEY) || "[]"
+);
+
+/*
+   নতুন PIN KEY ব্যবহার করা হয়েছে।
+   ফলে আগের 1234 PIN আর ব্যবহার হবে না।
+*/
+let adminPin = localStorage.getItem(PIN_KEY);
+
+if(!adminPin){
+
+    adminPin = NEW_ADMIN_PIN;
+
+    localStorage.setItem(
+        PIN_KEY,
+        adminPin
+    );
+
+}
+
+
+/* =====================================================
+   BANGLA DATE
+===================================================== */
+
+const banglaMonths = [
+    "বৈশাখ",
+    "জ্যৈষ্ঠ",
+    "আষাঢ়",
+    "শ্রাবণ",
+    "ভাদ্র",
+    "আশ্বিন",
+    "কার্তিক",
+    "অগ্রহায়ণ",
+    "পৌষ",
+    "মাঘ",
+    "ফাল্গুন",
+    "চৈত্র"
+];
+
+const banglaDays = [
+    "রবিবার",
+    "সোমবার",
+    "মঙ্গলবার",
+    "বুধবার",
+    "বৃহস্পতিবার",
+    "শুক্রবার",
+    "শনিবার"
+];
+
+const banglaNumbers = [
+    "০","১","২","৩","৪","৫","৬","৭","৮","৯"
+];
+
+function toBanglaNumber(number){
+
+    return String(number).replace(/[0-9]/g,function(d){
+
+        return banglaNumbers[d];
+
+    });
+
+}
+
+
+function getBanglaDate(date){
+
+    let year = date.getFullYear();
+    let month = date.getMonth();
+    let day = date.getDate();
+
+    let start;
+
+    if(
+        month > 3 ||
+        (month === 3 && day >= 14)
+    ){
+
+        start = new Date(year,3,14);
+
+    }else{
+
+        start = new Date(year-1,3,14);
+
+    }
+
+    let diff = Math.floor(
+        (date - start) /
+        (1000*60*60*24)
+    );
+
+    let bYear =
+        start.getFullYear() - 593;
+
+    let monthDays = [
+        31,31,31,31,31,30,
+        30,30,30,30,30,30
+    ];
+
+    let bMonth = 0;
+
+    while(
+        diff >= monthDays[bMonth] &&
+        bMonth < 11
+    ){
+
+        diff -= monthDays[bMonth];
+
+        bMonth++;
+
+    }
+
+    let bDay = diff + 1;
+
+    return {
+
+        year:bYear,
+
+        month:banglaMonths[bMonth],
+
+        day:bDay
+
+    };
+
+}
+
+
+/* =====================================================
+   DATE DISPLAY
+===================================================== */
+
+function updateToday(){
+
+    const now = new Date();
+
+    const eng =
+        String(now.getDate()).padStart(2,"0") +
+        "-" +
+        String(now.getMonth()+1).padStart(2,"0") +
+        "-" +
+        now.getFullYear();
+
+    const bd = getBanglaDate(now);
+
+    document.getElementById("engDate").textContent =
+        eng;
+
+    document.getElementById("banglaDate").textContent =
+        toBanglaNumber(bd.day) +
+        " " +
+        bd.month +
+        " " +
+        toBanglaNumber(bd.year);
+
+    document.getElementById("banglaDay").textContent =
+        banglaDays[now.getDay()];
+
+}
+
+
+/* =====================================================
+   MONEY FORMAT
+===================================================== */
+
+function money(value){
+
+    value = Number(value) || 0;
+
+    return "৳ " +
+        value.toLocaleString("en-BD",{
+
+            minimumFractionDigits:0,
+
+            maximumFractionDigits:2
+
+        });
+
+}
+
+
+/* =====================================================
+   SAVE DATABASE
+===================================================== */
+
+function saveDatabase(){
+
+    localStorage.setItem(
+        DATA_KEY,
+        JSON.stringify(accounts)
+    );
+
+}
+
+
+/* =====================================================
+   CURRENT BALANCE
+===================================================== */
+
+function calculateCurrentBalance(){
+
+    if(accounts.length === 0){
+
+        return 0;
+
+    }
+
+    const sorted = [...accounts].sort(
+        (a,b)=>a.date.localeCompare(b.date)
+    );
+
+    return Number(
+        sorted[sorted.length-1].closingCash
+    ) || 0;
+
+}
+
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+function updateDashboard(){
+
+    const totalSales =
+        accounts.reduce(
+            (sum,a)=>
+                sum + Number(a.sales || 0),
+            0
+        );
+
+    const totalExpense =
+        accounts.reduce(
+            (sum,a)=>
+                sum + Number(a.expense || 0),
+            0
+        );
+
+    document.getElementById("totalSales").textContent =
+        money(totalSales);
+
+    document.getElementById("totalExpense").textContent =
+        money(totalExpense);
+
+    document.getElementById("totalRecords").textContent =
+        accounts.length + " দিন";
+
+    document.getElementById("currentBalance").textContent =
+        money(calculateCurrentBalance());
+
+    renderHistory();
+
+}
+
+
+/* =====================================================
+   HISTORY
+===================================================== */
+
+function renderHistory(){
+
+    const box =
+        document.getElementById("history");
+
+    if(accounts.length === 0){
+
+        box.innerHTML =
+            '<div class="empty">এখনও কোনো হিসাব যোগ করা হয়নি।</div>';
+
+        return;
+
+    }
+
+    const sorted = [...accounts].sort(
+        (a,b)=>b.date.localeCompare(a.date)
+    );
+
+    box.innerHTML =
+        sorted.slice(0,10).map(a=>{
+
+        return `
+        <div class="history-item">
+
+            <div class="history-top">
+
+                <div>
+
+                    <div class="history-date">
+                        ${formatDate(a.date)}
+                    </div>
+
+                    <div class="history-day">
+                        ${a.banglaDate} • ${a.banglaDay}
+                    </div>
+
+                </div>
+
+                <strong>
+                    ${money(a.closingCash)}
+                </strong>
+
+            </div>
+
+            <div class="money-row">
+                <span>শুরুর ক্যাশ</span>
+                <strong>
+                    ${money(a.openingCash)}
+                </strong>
+            </div>
+
+            <div class="money-row">
+                <span>বিক্রি</span>
+                <strong>
+                    ${money(a.sales)}
+                </strong>
+            </div>
+
+            <div class="money-row">
+                <span>খরচ</span>
+                <strong>
+                    ${money(a.expense)}
+                </strong>
+            </div>
+
+            <div class="money-row total">
+                <span>আজকের ক্যাশ</span>
+                <strong>
+                    ${money(a.closingCash)}
+                </strong>
+            </div>
+
+        </div>
+        `;
+
+    }).join("");
+
+}
+
+
+/* =====================================================
+   ADMIN HISTORY
+===================================================== */
+
+function renderAdminHistory(){
+
+    const box =
+        document.getElementById("adminHistory");
+
+    if(accounts.length === 0){
+
+        box.innerHTML =
+            '<div class="empty">কোনো হিসাব নেই।</div>';
+
+        return;
+
+    }
+
+    const sorted = [...accounts].sort(
+        (a,b)=>b.date.localeCompare(a.date)
+    );
+
+    box.innerHTML =
+        sorted.map(a=>{
+
+        return `
+        <div class="history-item">
+
+            <div class="history-top">
+
+                <div>
+
+                    <div class="history-date">
+                        ${formatDate(a.date)}
+                    </div>
+
+                    <div class="history-day">
+                        ${a.banglaDate} • ${a.banglaDay}
+                    </div>
+
+                </div>
+
+                <strong>
+                    ${money(a.closingCash)}
+                </strong>
+
+            </div>
+
+            <div class="money-row">
+                <span>শুরুর ক্যাশ</span>
+                <strong>
+                    ${money(a.openingCash)}
+                </strong>
+            </div>
+
+            <div class="money-row">
+                <span>বিক্রি</span>
+                <strong>
+                    ${money(a.sales)}
+                </strong>
+            </div>
+
+            <div class="money-row">
+                <span>খরচ</span>
+                <strong>
+                    ${money(a.expense)}
+                </strong>
+            </div>
+
+            <div class="buttons" style="margin-top:10px;">
+
+                <button
+                    class="btn-blue"
+                    onclick="editAccount('${a.id}')">
+                    ✏️ Edit
+                </button>
+
+                <button
+                    class="btn-red"
+                    onclick="deleteAccount('${a.id}')">
+                    🗑️ Delete
+                </button>
+
+            </div>
+
+        </div>
+        `;
+
+    }).join("");
+
+}
+
+
+/* =====================================================
+   DATE FORMAT
+===================================================== */
+
+function formatDate(dateString){
+
+    const parts =
+        dateString.split("-");
+
+    return (
+        parts[2] +
+        "-" +
+        parts[1] +
+        "-" +
+        parts[0]
+    );
+
+}
+
+
+/* =====================================================
+   PREVIEW
+===================================================== */
+
+function updatePreview(){
+
+    const opening =
+        Number(
+            document.getElementById(
+                "openingCash"
+            ).value
+        ) || 0;
+
+    const sales =
+        Number(
+            document.getElementById(
+                "sales"
+            ).value
+        ) || 0;
+
+    const expense =
+        Number(
+            document.getElementById(
+                "expense"
+            ).value
+        ) || 0;
+
+    const result =
+        opening + sales - expense;
+
+    document.getElementById(
+        "todayPreview"
+    ).textContent =
+        money(result);
+
+}
+
+document.getElementById(
+    "openingCash"
+).addEventListener(
+    "input",
+    updatePreview
+);
+
+document.getElementById(
+    "sales"
+).addEventListener(
+    "input",
+    updatePreview
+);
+
+document.getElementById(
+    "expense"
+).addEventListener(
+    "input",
+    updatePreview
+);
+
+
+/* =====================================================
+   OPEN ADMIN
+===================================================== */
+
+function openAdmin(){
+
+    document.getElementById(
+        "adminModal"
+    ).style.display = "block";
+
+    document.getElementById(
+        "pinInput"
+    ).value = "";
+
+}
+
+
+/* =====================================================
+   CLOSE ADMIN
+===================================================== */
+
+function closeAdmin(){
+
+    document.getElementById(
+        "adminModal"
+    ).style.display = "none";
+
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+function login(){
+
+    const pin =
+        document.getElementById(
+            "pinInput"
+        ).value;
+
+    if(pin === adminPin){
+
+        document.getElementById(
+            "loginSection"
+        ).style.display = "none";
+
+        document.getElementById(
+            "panelSection"
+        ).style.display = "block";
+
+        setDefaultDate();
+
+        renderAdminHistory();
+
+        document.getElementById(
+            "openingCash"
+        ).value =
+            calculateCurrentBalance();
+
+        updatePreview();
+
+    }else{
+
+        alert(
+            "❌ ভুল PIN! আবার চেষ্টা করুন।"
+        );
+
+        document.getElementById(
+            "pinInput"
+        ).value = "";
+
+    }
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logout(){
+
+    document.getElementById(
+        "panelSection"
+    ).style.display = "none";
+
+    document.getElementById(
+        "loginSection"
+    ).style.display = "block";
+
+    document.getElementById(
+        "pinInput"
+    ).value = "";
+
+    alert(
+        "Admin Logout হয়েছে।"
+    );
+
+}
+
+
+/* =====================================================
+   DEFAULT DATE
+===================================================== */
+
+function setDefaultDate(){
+
+    const now = new Date();
+
+    const date =
+        now.getFullYear() +
+        "-" +
+        String(
+            now.getMonth()+1
+        ).padStart(2,"0") +
+        "-" +
+        String(
+            now.getDate()
+        ).padStart(2,"0");
+
+    document.getElementById(
+        "accountDate"
+    ).value = date;
+
+}
+
+
+/* =====================================================
+   GET PREVIOUS CASH
+===================================================== */
+
+function getPreviousCash(date){
+
+    const previous =
+        accounts
+        .filter(a=>a.date < date)
+        .sort(
+            (a,b)=>
+                b.date.localeCompare(a.date)
+        );
+
+    if(previous.length === 0){
+
+        return 0;
+
+    }
+
+    return Number(
+        previous[0].closingCash
+    ) || 0;
+
+}
+
+
+/* =====================================================
+   SAVE ACCOUNT
+===================================================== */
+
+function saveAccount(){
+
+    const date =
+        document.getElementById(
+            "accountDate"
+        ).value;
+
+    const opening =
+        Number(
+            document.getElementById(
+                "openingCash"
+            ).value
+        );
+
+    const sales =
+        Number(
+            document.getElementById(
+                "sales"
+            ).value
+        );
+
+    const expense =
+        Number(
+            document.getElementById(
+                "expense"
+            ).value
+        );
+
+    if(!date){
+
+        alert(
+            "তারিখ নির্বাচন করুন।"
+        );
+
+        return;
+
+    }
+
+    if(
+        isNaN(opening) ||
+        isNaN(sales) ||
+        isNaN(expense) ||
+        opening < 0 ||
+        sales < 0 ||
+        expense < 0
+    ){
+
+        alert(
+            "সঠিক টাকা লিখুন।"
+        );
+
+        return;
+
+    }
+
+    const existing =
+        accounts.find(
+            a=>a.date === date
+        );
+
+    let finalOpening =
+        opening;
+
+    if(
+        !existing &&
+        opening === 0 &&
+        accounts.length > 0
+    ){
+
+        finalOpening =
+            getPreviousCash(date);
+
+    }
+
+    const closing =
+        finalOpening +
+        sales -
+        expense;
+
+    if(closing < 0){
+
+        const proceed =
+            confirm(
+                "⚠️ আজকের ক্যাশ ঋণাত্মক হচ্ছে।\n\n" +
+                "আপনি কি সত্যিই এই হিসাব সংরক্ষণ করতে চান?"
+            );
+
+        if(!proceed){
+
+            return;
+
+        }
+
+    }
+
+    const d =
+        new Date(
+            date + "T00:00:00"
+        );
+
+    const bd =
+        getBanglaDate(d);
+
+    const data = {
+
+        id:
+            existing
+            ? existing.id
+            : Date.now().toString(),
+
+        date:date,
+
+        banglaDate:
+            toBanglaNumber(bd.day) +
+            " " +
+            bd.month +
+            " " +
+            toBanglaNumber(bd.year),
+
+        banglaDay:
+            banglaDays[d.getDay()],
+
+        openingCash:
+            finalOpening,
+
+        sales:
+            sales,
+
+        expense:
+            expense,
+
+        closingCash:
+            closing
+
+    };
+
+
+    if(existing){
+
+        const index =
+            accounts.findIndex(
+                a=>a.id === existing.id
+            );
+
+        accounts[index] =
+            data;
+
+    }else{
+
+        accounts.push(data);
+
+    }
+
+    accounts.sort(
+        (a,b)=>
+            a.date.localeCompare(b.date)
+    );
+
+    saveDatabase();
+
+    updateDashboard();
+
+    renderAdminHistory();
+
+    clearForm();
+
+    alert(
+        "✅ হিসাব সফলভাবে সংরক্ষণ হয়েছে।\n\n" +
+        "আজকের ক্যাশ: " +
+        money(closing)
+    );
+
+}
+
+
+/* =====================================================
+   CLEAR FORM
+===================================================== */
+
+function clearForm(){
+
+    document.getElementById(
+        "sales"
+    ).value = "";
+
+    document.getElementById(
+        "expense"
+    ).value = "";
+
+    document.getElementById(
+        "openingCash"
+    ).value =
+        calculateCurrentBalance();
+
+    updatePreview();
+
+}
+
+
+/* =====================================================
+   EDIT
+===================================================== */
+
+function editAccount(id){
+
+    const a =
+        accounts.find(
+            x=>x.id === id
+        );
+
+    if(!a) return;
+
+    document.getElementById(
+        "accountDate"
+    ).value =
+        a.date;
+
+    document.getElementById(
+        "openingCash"
+    ).value =
+        a.openingCash;
+
+    document.getElementById(
+        "sales"
+    ).value =
+        a.sales;
+
+    document.getElementById(
+        "expense"
+    ).value =
+        a.expense;
+
+    updatePreview();
+
+    alert(
+        "✏️ হিসাবটি Edit করার জন্য ফর্মে আনা হয়েছে।\n" +
+        "পরিবর্তন করে আবার সংরক্ষণ করুন।"
+    );
+
+}
+
+
+/* =====================================================
+   DELETE SINGLE
+===================================================== */
+
+function deleteAccount(id){
+
+    const a =
+        accounts.find(
+            x=>x.id === id
+        );
+
+    if(!a) return;
+
+    const ok =
+        confirm(
+            "⚠️ আপনি কি এই দিনের হিসাব মুছে ফেলতে চান?\n\n" +
+            formatDate(a.date)
+        );
+
+    if(!ok) return;
+
+    accounts =
+        accounts.filter(
+            x=>x.id !== id
+        );
+
+    saveDatabase();
+
+    updateDashboard();
+
+    renderAdminHistory();
+
+}
+
+
+/* =====================================================
+   DELETE ALL
+===================================================== */
+
+function deleteAllData(){
+
+    if(accounts.length === 0){
+
+        alert(
+            "মুছে ফেলার মতো কোনো হিসাব নেই।"
+        );
+
+        return;
+
+    }
+
+    const first =
+        confirm(
+            "⚠️ সতর্কতা!\n\n" +
+            "সব হিসাব স্থায়ীভাবে মুছে যাবে।\n" +
+            "আপনি কি নিশ্চিত?"
+        );
+
+    if(!first) return;
+
+    const second =
+        prompt(
+            "নিশ্চিত করতে লিখুন: DELETE"
+        );
+
+    if(second !== "DELETE"){
+
+        alert(
+            "কোনো হিসাব মুছে ফেলা হয়নি।"
+        );
+
+        return;
+
+    }
+
+    accounts = [];
+
+    saveDatabase();
+
+    updateDashboard();
+
+    renderAdminHistory();
+
+    alert(
+        "✅ সব হিসাব মুছে ফেলা হয়েছে।"
+    );
+
+}
+
+
+/* =====================================================
+   CHANGE PIN
+===================================================== */
+
+function changePin(){
+
+    const oldPin =
+        prompt(
+            "বর্তমান PIN লিখুন:"
+        );
+
+    if(oldPin !== adminPin){
+
+        alert(
+            "❌ বর্তমান PIN সঠিক নয়।"
+        );
+
+        return;
+
+    }
+
+    const newPin =
+        prompt(
+            "নতুন PIN লিখুন:"
+        );
+
+    if(
+        !newPin ||
+        newPin.length < 4
+    ){
+
+        alert(
+            "❌ PIN কমপক্ষে ৪ সংখ্যার হতে হবে।"
+        );
+
+        return;
+
+    }
+
+    const confirmPin =
+        prompt(
+            "নতুন PIN আবার লিখুন:"
+        );
+
+    if(newPin !== confirmPin){
+
+        alert(
+            "❌ দুইটি PIN মিলেনি।"
+        );
+
+        return;
+
+    }
+
+    adminPin =
+        newPin;
+
+    localStorage.setItem(
+        PIN_KEY,
+        adminPin
+    );
+
+    alert(
+        "✅ Admin PIN সফলভাবে পরিবর্তন হয়েছে।"
+    );
+
+}
+
+
+/* =====================================================
+   BACKUP
+===================================================== */
+
+function exportData(){
+
+    const backup = {
+
+        shop:
+            "হ্যাম বার্গার ক্যাফে এন্ড ফাস্টফুড",
+
+        address:
+            "চর লরেন্স দক্ষিণ বাজার, মেইন রোড, কমলনগর, লক্ষ্মীপুর",
+
+        createdAt:
+            new Date().toISOString(),
+
+        accounts:
+            accounts
+
+    };
+
+    const blob =
+        new Blob(
+            [
+                JSON.stringify(
+                    backup,
+                    null,
+                    2
+                )
+            ],
+            {
+                type:
+                    "application/json"
+            }
+        );
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const a =
+        document.createElement("a");
+
+    a.href =
+        url;
+
+    a.download =
+        "ham-burger-account-backup-" +
+        new Date()
+            .toISOString()
+            .slice(0,10) +
+        ".json";
+
+    a.click();
+
+    URL.revokeObjectURL(url);
+
+}
+
+
+/* =====================================================
+   RESTORE
+===================================================== */
+
+function importData(event){
+
+    const file =
+        event.target.files[0];
+
+    if(!file) return;
+
+    const reader =
+        new FileReader();
+
+    reader.onload =
+        function(e){
+
+        try{
+
+            const data =
+                JSON.parse(
+                    e.target.result
+                );
+
+            if(
+                !data.accounts ||
+                !Array.isArray(
+                    data.accounts
+                )
+            ){
+
+                throw new Error();
+
+            }
+
+            const ok =
+                confirm(
+                    "⚠️ Backup Restore করলে বর্তমান হিসাব Replace হবে।\n\n" +
+                    "আপনি কি নিশ্চিত?"
+                );
+
+            if(!ok) return;
+
+            accounts =
+                data.accounts;
+
+            saveDatabase();
+
+            updateDashboard();
+
+            renderAdminHistory();
+
+            alert(
+                "✅ Backup সফলভাবে Restore হয়েছে।"
+            );
+
+        }catch(error){
+
+            alert(
+                "❌ Backup ফাইলটি সঠিক নয়।"
+            );
+
+        }
+
+        event.target.value = "";
+
+    };
+
+    reader.readAsText(file);
+
+}
+
+
+/* =====================================================
+   CLOSE MODAL OUTSIDE
+===================================================== */
+
+document.getElementById(
+    "adminModal"
+)
+.addEventListener(
+    "click",
+    function(e){
+
+        if(e.target === this){
+
+            closeAdmin();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   ENTER KEY LOGIN
+===================================================== */
+
+document.getElementById(
+    "pinInput"
+)
+.addEventListener(
+    "keydown",
+    function(e){
+
+        if(e.key === "Enter"){
+
+            login();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+updateToday();
+
+updateDashboard();
+
+setInterval(
+    updateToday,
+    60000
+);
+
+
+/* =====================================================
+   PREVENT NEGATIVE INPUT
+===================================================== */
+
+document
+.querySelectorAll(
+    'input[type="number"]'
+)
+.forEach(
+    function(input){
+
+        input.addEventListener(
+            "input",
+            function(){
+
+                if(
+                    Number(this.value) < 0
+                ){
+
+                    this.value = 0;
+
+                }
+
+            }
+        );
+
+    }
+);
+
+</script>
+
+</body>
+</html>
